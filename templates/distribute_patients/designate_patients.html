@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Designate Patients - {{ date|date:"n/j/y" }}
+{% endblock %}
+
+
+{% block body_block %}
+    <div class="col-4 mx-auto shrunk">
+
+        {% include 'distribute_patients/ordered_line_items_starting_census.html' %}
+    </div>
+    <div class="col-6">
+    </div>
+    <form method="post" id="id_designate_patients_formset" action="{% url 'distribute:designate_patients' %}">
+        <div class="row card-deck">
+
+            {% csrf_token %}
+            {{ formset.management_form|crispy }}
+            {% for form in formset %}
+                <div class="col-auto mb-2">
+                    <div class="card patient-card">
+                        <div class="card-header text-center">{{ form.instance.number_designation }}</div>
+                        <div class="card-body">
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+        <div class="text-center">
+            <input type="submit" name="submit_patient_forms" value="Submit" class="btn btn-primary top-margin-15"
+                   id="id_submit_patient_forms">
+        </div>
+    </form>
+{% endblock %}

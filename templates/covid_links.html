@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Covid Links
+{% endblock %}
+
+{% block body_block %}
+{% for link_name, link_url in links.items %}
+<ul>
+<a href="{{ link_url }}">{{ link_name }}</a>
+</ul>
+{% endfor %}
+{% endblock %}

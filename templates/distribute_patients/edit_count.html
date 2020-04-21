@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Patient Count - {{ date|date:"n/j/y" }}
+{% endblock %}
+
+{% block body_block %}
+    <div class="row">
+        <div class="col-6">
+            {% include 'distribute_patients/ordered_line_items_starting_census.html' %}
+        </div>
+        <div class="col-6">
+            {% crispy patient_count_form %}
+        </div>
+    </div>
+
+{% endblock %}

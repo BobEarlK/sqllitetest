@@ -1,4 +1,4 @@
-"""covid4 URL Configuration
+"""COVID URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,8 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from .settings import DEBUG
+
+from distribute_patients.views import set_rounders, covid_links
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('distribute/', include ('distribute_patients.urls')),
+    path('covid_links/', covid_links, name='covid_links'),
+    path('', set_rounders, name='set_rounders'),
 ]
+if DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

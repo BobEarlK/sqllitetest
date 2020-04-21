@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Patient Assignments - {{ date|date:"n/j/y" }}
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="col-11">
+        <table class="table table-sm text-center">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col-1">Provider</th>
+                <th scope="col-2">Starting Census <br>Total - (CCU) &ltCOVID&gt</th>
+                <th scope="col-2">Bouncebacks</th>
+                <th scope="col-2">CCU/COVID</th>
+                <th scope="col-2">CCU</th>
+                <th scope="col-2">COVID</th>
+                <th scope="col-2">neg/neg</th>
+                <th scope="col-2">Final Census <br>Total - (CCU) &ltCOVID&gt</th>
+            </tr>
+            </thead>
+            <tbody >
+            {% for line_item, patient_dict in patient_assignment_dict.items %}
+                <tr>
+                    <td>{{ line_item.provider.abbreviation }}</td>
+                    <td>{{ line_item.starting_census.total }} - ({{ line_item.starting_census.CCU }}) &lt{{ line_item.starting_census.COVID }}&gt</td>
+                    <td class="text-success">{% for patient in patient_dict.bounceback_pts %}
+                        {{ patient.number_designation }}  {% endfor %}</td>
+                    <td class="text-warning">{% for patient in patient_dict.dual_pos_pts %}
+                        {{ patient.number_designation }}  {% endfor %}</td>
+                    <td class="text-danger">{% for patient in patient_dict.ccu_pos_pts %}
+                        {{ patient.number_designation }}  {% endfor %}</td>
+                    <td class="text-info">{% for patient in patient_dict.covid_pos_pts %}
+                        {{ patient.number_designation }}  {% endfor %}</td>
+                    <td>{% for patient in patient_dict.dual_neg_pts %}
+                        {{ patient.number_designation }}  {% endfor %}</td>
+                   <td>{{ line_item.assigned_census.total }} - ({{ line_item.assigned_census.CCU }}) &lt{{ line_item.assigned_census.COVID }}&gt</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

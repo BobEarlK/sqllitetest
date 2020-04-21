@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Set Rounders - {{ date|date:"n/j/y" }}
+{% endblock %}
+
+{% block body_block %}
+    <div class="col-10 container jumbotron text-align-center">
+        <h2 class="display-5">Rounders with starting census</h2>
+            <form method="post" id="id_set_rounders_formset" action="{% url 'set_rounders' %}">
+
+
+                {% csrf_token %}
+                {{ rounder_formset.management_form|crispy }}
+                <tr>
+                    {% for form in rounder_formset %}
+                        {% crispy form %}
+                    {% endfor %}
+                </tr>
+
+                <input type="submit" name="submit_rounder_forms" value="Submit" class="btn btn-primary top-margin-15"
+                       id="id_submit_rounder_forms">
+
+            </form>
+
+    </div>
+
+{% endblock %}

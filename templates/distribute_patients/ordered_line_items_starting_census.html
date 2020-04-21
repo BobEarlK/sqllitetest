@@ -1,0 +1,21 @@
+
+    <table class="table table-sm tighter-table" id="id_starting_census_table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Provider</th>
+        <th scope="col">Total</th>
+        <th scope="col">CCU</th>
+        <th scope="col">COVID</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for line_item in ordered_line_items %}
+    <tr id="id_rounder_row">
+        <td id="id_provider_cell">{{ line_item.provider.abbreviation }}</td>
+        <td id="id_total_census_cell">{{ line_item.starting_census.total }} </td>
+        <td id="id_CCU_census_cell">{{ line_item.starting_census.CCU }}</td>
+        <td id="id_COVID_census_cell">{{ line_item.starting_census.COVID }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>

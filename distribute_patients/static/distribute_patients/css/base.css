@@ -1,0 +1,25 @@
+.patient-card{
+    background: powderblue;
+}
+
+.tighter-table{
+    font-size: smaller;
+    font-weight:100;
+    padding:.2rem;
+
+}
+.patient-card .form-group{
+    margin-bottom: 3px;
+}
+
+.patient-card .card-body{
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.patient-card .card-header{
+    font-size: large;
+    padding:.1rem;
+}
